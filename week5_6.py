@@ -5,7 +5,7 @@ from week4 import build_matrices
 
 def compute_S(Energy, **kwargs):
     """
-    Eqs. (4)-(5) from Xing et al. (2023):
+    Eqs. (4)-(5):
 
         B = M00 - M0^T M^{-1} M0
         C = M10 - M0*^T M^{-1} M0
@@ -25,15 +25,12 @@ def compute_S(Energy, **kwargs):
 
 
 if __name__ == "__main__":
-
-    # --- Week 5: quick test ---
     E_test = 0.5
     S_test = compute_S(E_test, N_L=2, gamma=1.5)
     print("Week 5 test")
     print("E =", E_test)
     print("S =", S_test, " |S| =", abs(S_test))
 
-    # --- Week 6: reproduce Figure 3 ---
     # V(R) = -exp(-R), gamma = 1.5, mu = 1, N_l = 2
     gamma = 1.5
     N_L = 2
