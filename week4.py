@@ -9,43 +9,30 @@ hbar = 1.0
 
 def V(R):
     return -np.exp(-R)
-<<<<<<< HEAD
-=======
-
->>>>>>> 905d95e (Final changes to week 4)
 
 def norm_factor(l, gamma):
     return np.sqrt((2 * gamma) ** (2 * l - 1) / factorial(2 * l - 2))
+
 
 def u_basis(R, l, gamma):
     F = norm_factor(l, gamma)
     return F * R ** (l - 1) * np.exp(-gamma * R)
 
-def cutoff(R, gamma):
-    return 1.0 - np.exp(-gamma * R)
 
-<<<<<<< HEAD
-=======
 def cutoff(R, gamma):
     return 1.0 - np.exp(-gamma * R)
 
 
->>>>>>> 905d95e (Final changes to week 4)
 def u0_func(R, k, gamma):
     """Incoming wave: u0 = f(R) exp(-ikR) / sqrt(v)"""
     v = hbar * k / mu
     return cutoff(R, gamma) * np.exp(-1j * k * R) / np.sqrt(v)
 
-def u1_func(R, k, gamma):
-    """Outgoing wave: u1 = u0*"""
-    return np.conj(u0_func(R, k, gamma))
 
 def u1_func(R, k, gamma):
     """Outgoing wave: u1 = u0*"""
     return np.conj(u0_func(R, k, gamma))
 
-
-# --- Analytical second derivatives ---
 
 def d2_u_basis_unnorm(R, l, gamma):
     term1 = (l - 1) * (l - 2) * R ** (l - 3) if l >= 3 else 0.0
@@ -53,16 +40,14 @@ def d2_u_basis_unnorm(R, l, gamma):
     term3 = gamma ** 2 * R ** (l - 1)
     return (term1 + term2 + term3) * np.exp(-gamma * R)
 
+
 def H_minus_E_basis(R, l, gamma, Energy):
     F = norm_factor(l, gamma)
     u = F * R ** (l - 1) * np.exp(-gamma * R)
     d2u = F * d2_u_basis_unnorm(R, l, gamma)
     return -hbar ** 2 / (2 * mu) * d2u + (V(R) - Energy) * u
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 905d95e (Final changes to week 4)
 def d2_u0(R, k, gamma):
     v = hbar * k / mu
     f   =  1.0 - np.exp(-gamma * R)
@@ -73,16 +58,7 @@ def d2_u0(R, k, gamma):
     gpp = (-1j * k) ** 2 * g
     return fpp * g + 2 * fp * gp + f * gpp
 
-def H_minus_E_u0(R, k, gamma, Energy):
-    u = u0_func(R, k, gamma)
-    d2u = d2_u0(R, k, gamma)
-    return -hbar ** 2 / (2 * mu) * d2u + (V(R) - Energy) * u
 
-<<<<<<< HEAD
-def build_matrices(Energy, N_L=10, gamma=1.5, R_max=30.0):
-    """
-    Gaussian quadrature with analytical derivatives.
-=======
 def H_minus_E_u0(R, k, gamma, Energy):
     u = u0_func(R, k, gamma)
     d2u = d2_u0(R, k, gamma)
@@ -94,7 +70,6 @@ def build_matrices(Energy, N_L=10, gamma=1.5, R_max=30.0):
     Gaussian quadrature with analytical derivatives.
 
     Returns:
->>>>>>> 905d95e (Final changes to week 4)
         M    : (N_L-1) x (N_L-1) real symmetric matrix
         M0   : (N_L-1) complex vector
         M00  : complex scalar  <u0|H-E|u0>
@@ -154,8 +129,4 @@ if __name__ == "__main__":
     print("M:", M)
     print("M0:", M0)
     print("M00:", M00)
-<<<<<<< HEAD
     print("M10:", M10)
-=======
-    print("M10:", M10)
->>>>>>> 905d95e (Final changes to week 4)
